@@ -34,9 +34,6 @@ var container = document.getElementById("theContact");
 var favoriteBadges = document.querySelector("#favoriteBadge");
 
 // -----------------------------------------------------------------------------------------
-
-var profile = document.getElementById("profileIcon");
-
 var colors = {
   0: "color-one",
   1: "color-two",
@@ -140,14 +137,7 @@ function clearInputs() {
   userAddressInput.value = ""; // او null
   checkboxTwo.checked = "";
   checkboxOne.checked = "";
-  profile.innerHTML = `<i class="fas fa-user text-white"></i>`;
 }
-
-userImg.addEventListener("change", function () {
-  var file = `images/${userImg.files[0].name}`;
-  imageHTML = `<img style="border-radius: 12px" src="${file}" />`;
-  profile.innerHTML = imageHTML;
-});
 
 function displayContact() {
   var emCounter = 0;
@@ -160,28 +150,14 @@ function displayContact() {
   var cartona = "";
 
   for (var i = 0; i < array.length; i++) {
-    // var imageHTML = array[i].image
-    //   ? `<img style="border-radius: 12px" src="${array[i].image}" />`
-    //   : `<span class="text-white">${
-    //       array[i].name.split(" ")[0].charAt(0).toUpperCase() +
-    //       (array[i].name.split(" ")[1]
-    //         ? array[i].name.split(" ")[1].charAt(0).toUpperCase()
-    //         : "")
-    //     }</span>`;
-
-    var first = array[i].name.split(" ")[0].charAt(0).toUpperCase();
-
-    var second = array[i].name.split(" ")[1]
-      ? array[i].name.split(" ")[1].charAt(0).toUpperCase()
-      : "";
-
-    var sum = `<span class="text-white">${first + second}</span>`;
-
-    if (array[i].image) {
-      imageHTML = `<img style="border-radius: 12px" src="${array[i].image}" />`;
-    } else {
-      imageHTML = sum;
-    }
+    var imageHTML = array[i].image
+      ? `<img style="border-radius: 12px" src="${array[i].image}" />`
+      : `<span class="text-white">${
+          array[i].name.split(" ")[0].charAt(0).toUpperCase() +
+          (array[i].name.split(" ")[1]
+            ? array[i].name.split(" ")[1].charAt(0).toUpperCase()
+            : "")
+        }</span>`;
 
     if (array[i].emergencyCheckbox) {
       emCounter = emCounter + 1; //* or count ++ (its own statement)
@@ -408,7 +384,7 @@ function deleteContact(deleteI) {
   swalWithBootstrapButtons
     .fire({
       title: "Delete Contact ?",
-      text: `Are you sure you want to delete ${array[deleteI].name}? This action cannot be undone.`,
+      text: "Are you sure you want to delete Ahmed? This action cannot be undone.",
       icon: "warning",
       customClass: {
         confirmButton: "btn btn-danger me-2",
@@ -478,7 +454,6 @@ function updateData(updateI) {
   userSelectInput.value = array[updateI].selectOption;
   checkboxTwo.checked = array[updateI].emergencyCheckbox;
   checkboxOne.checked = array[updateI].favoriteCheckbox;
-  profile.innerHTML = `<img style="border-radius: 12px" src="${array[updateI].image}" />`;
 }
 function addAfterUpdate() {
   array[updateIndex].name = userNameInput.value;
