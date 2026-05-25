@@ -32,6 +32,7 @@ var AllContact = document.getElementById("zeroContact");
 var stars = document.querySelectorAll(".fa-star");
 var container = document.getElementById("theContact");
 var favoriteBadges = document.querySelector("#favoriteBadge");
+var profile = document.getElementById("profileIcon");
 
 // -----------------------------------------------------------------------------------------
 var colors = {
@@ -138,7 +139,11 @@ function clearInputs() {
   checkboxTwo.checked = "";
   checkboxOne.checked = "";
 }
-
+userImg.addEventListener("change", function () {
+  var file = `images/${userImg.files[0].name}`;
+  imageHTML = `<img style="border-radius: 12px" src="${file}" />`;
+  profile.innerHTML = imageHTML;
+});
 function displayContact() {
   var emCounter = 0;
   var favCounter = 0;
@@ -384,7 +389,7 @@ function deleteContact(deleteI) {
   swalWithBootstrapButtons
     .fire({
       title: "Delete Contact ?",
-      text: "Are you sure you want to delete Ahmed? This action cannot be undone.",
+      text: `Are you sure you want to delete ${array[deleteI].name}? This action cannot be undone.`,
       icon: "warning",
       customClass: {
         confirmButton: "btn btn-danger me-2",
@@ -454,6 +459,8 @@ function updateData(updateI) {
   userSelectInput.value = array[updateI].selectOption;
   checkboxTwo.checked = array[updateI].emergencyCheckbox;
   checkboxOne.checked = array[updateI].favoriteCheckbox;
+    profile.innerHTML = `<img style="border-radius: 12px" src="${array[updateI].image}" />`;
+
 }
 function addAfterUpdate() {
   array[updateIndex].name = userNameInput.value;
